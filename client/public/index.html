@@ -1,55 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Employee Search Portal</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee Search Portal</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <img src="ncl logo.jpg" alt="Company Logo" class="logo">
-            <h1>Employee Search Portal</h1>
-        </header>
+  <div class="container">
+    <header>
+      <a href="index.html" class="logo-link">
+        <img src="ncl logo.jpg" alt="NCL Company Logo" class="logo">
+      </a>
+      <h1>Employee Search Portal</h1>
+      <div class="action-buttons">
+        <button id="addNewBtn" class="btn btn-add" aria-label="Add new employee">
+          <i class="fas fa-plus"></i> Add New Employee
+        </button>
+      </div>
+    </header>
 
-        <section class="search-section">
-            <div class="search-box">
-                <input type="text" id="searchInput" placeholder="Enter employee ID or name...">
-                <button id="searchBtn"><i class="fas fa-search"></i> Search</button>
-            </div>
-            <div class="search-options">
-                <label>
-                    <input type="radio" name="searchType" value="id" checked> Search by ID
-                </label>
-                <label>
-                    <input type="radio" name="searchType" value="name"> Search by Name
-                </label>
-            </div>
-        </section>
+    <!-- Search Section -->
+    <section class="search-section" aria-labelledby="searchHeading">
+      <h2 id="searchHeading" class="sr-only">Employee Search</h2>
+      
+      <div class="search-box">
+        <label for="searchInput" class="sr-only">Search employees</label>
+        <input 
+          type="text" 
+          id="searchInput" 
+          placeholder="Enter employee ID or name..."
+          aria-describedby="searchInstructions"
+        >
+        <button id="searchBtn" class="btn" aria-label="Search">
+          <i class="fas fa-search"></i> Search
+        </button>
+      </div>
+      
+      <div class="search-options" role="radiogroup" aria-labelledby="searchOptionsLabel">
+        <p id="searchOptionsLabel">Search by:</p>
+        <label>
+          <input type="radio" name="searchType" value="id" checked> 
+          ID
+        </label>
+        <label>
+          <input type="radio" name="searchType" value="name"> 
+          Name
+        </label>
+      </div>
+    </section>
 
-        <section class="results-section">
-            <div id="loading" class="loading" style="display: none;">
-                <i class="fas fa-spinner fa-spin"></i>
-                <p>Loading employee data...</p>
-            </div>
-            
-            <div id="noResults" class="no-results" style="display: none;">
-                <i class="fas fa-user-times"></i>
-                <p>No employees found</p>
-            </div>
+    <!-- Results Section -->
+    <section class="results-section" aria-labelledby="resultsHeading">
+      <h2 id="resultsHeading" class="sr-only">Search Results</h2>
+      
+      <div id="loading" class="loading" style="display: none;" aria-live="polite">
+        <i class="fas fa-spinner fa-spin" aria-hidden="true"></i>
+        <p>Loading employee data...</p>
+      </div>
 
-            <div id="employeeResults">
-                <!-- Employee cards will be inserted here by JavaScript -->
+      <div id="noResults" class="no-results" style="display: none;" aria-live="polite">
+        <i class="fas fa-user-times" aria-hidden="true"></i>
+        <p>No employees found matching your search</p>
+      </div>
+
+      <div id="employeeResults" class="employee-results"></div>
+
+      <!-- Add New Employee Form -->
+      <div id="addEmployeeForm" class="add-form" style="display: none;" aria-hidden="true">
+        <h2>Add New Employee</h2>
+        <form id="employeeForm">
+          <div id="dynamicFields">
+            <div class="field-group">
+              <label for="fieldName1" class="sr-only">Field name</label>
+              <input 
+                type="text" 
+                id="fieldName1" 
+                class="field-name" 
+                placeholder="Field name" 
+                value="name"
+                required
+              >
+              <span aria-hidden="true">:</span>
+              <label for="fieldValue1" class="sr-only">Field value</label>
+              <input 
+                type="text" 
+                id="fieldValue1" 
+                class="field-value" 
+                placeholder="Value" 
+                required
+              >
+              <button type="button" class="btn btn-icon remove-field-btn" aria-label="Remove field">
+                <i class="fas fa-minus"></i>
+              </button>
+              <button type="button" class="btn btn-icon add-field-btn" aria-label="Add field">
+                <i class="fas fa-plus"></i>
+              </button>
             </div>
-        </section>
+          </div>
+          <div class="form-actions">
+            <button type="submit" id="submitAdd" class="btn btn-primary">
+              Submit
+            </button>
+            <button type="button" id="cancelAdd" class="btn btn-secondary">
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
 
-        <footer>
-            <p>&copy; 2023 Employee Search Portal. All rights reserved.</p>
-        </footer>
-    </div>
+    <footer>
+      <p>&copy; 2025 Employee Search Portal. All rights reserved.</p>
+    </footer>
+  </div>
 
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

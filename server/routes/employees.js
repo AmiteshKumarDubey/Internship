@@ -1,47 +1,30 @@
 const express = require('express');
 const router = express.Router();
+
 const {
   getEmployees,
-  getEmployee,
+  getEmployeeById,
   createEmployee,
   updateEmployee,
-  deleteEmployee,
-  getEmployeeStats,
-  getDepartmentEmployees,
-  getEmployeesByAgeRange,
-  getEmployeesBySalaryRange,
-  getEmployeesByJobRole
+  addEmployeeDetail,
+  getDepartmentEmployees
 } = require('../controllers/employeeController');
 
-// Modified to support search by name (query param)
+// Main employee routes
 router.route('/')
-  .get(getEmployees) // now supports ?name=xyz
+  .get(getEmployees)
   .post(createEmployee);
 
-// Employee statistics
-router.route('/stats')
-  .get(getEmployeeStats);
-
-// Department filter
+// Department route
 router.route('/department/:department')
   .get(getDepartmentEmployees);
 
-// Age filter
-router.route('/age/:minAge/:maxAge')
-  .get(getEmployeesByAgeRange);
-
-// Salary filter
-router.route('/salary/:minSalary/:maxSalary')
-  .get(getEmployeesBySalaryRange);
-
-// Job role filter
-router.route('/jobrole/:role')
-  .get(getEmployeesByJobRole);
-
-// Get/Update/Delete single employee by ID
+// Get or update employee by ID
 router.route('/:id')
-  .get(getEmployee)
-  .put(updateEmployee)
-  .delete(deleteEmployee);
+  .get(getEmployeeById)
+  .put(updateEmployee);
+
+// Add dynamic field to employee
+router.patch('/:id/details', addEmployeeDetail);
 
 module.exports = router;

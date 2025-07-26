@@ -7,66 +7,134 @@
 }
 
 body {
-    background-color: #f5f5f5;
-    color: #333;
-    line-height: 1.6;
+  background-color: #eef4f7;
+  color: #333;
+  line-height: 1.6;
 }
 
 .container {
-    max-width: 1200px;
+    padding: 0 5%;
     margin: 0 auto;
-    padding: 20px;
 }
 
 /* Header Styles */
 header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
     margin-bottom: 30px;
     padding: 20px 0;
-    border-bottom: 2px solid #e1e1e1;
+    background-color: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    position: relative;
 }
 
 .logo {
-    height: 50px;
+    height: 80px;
+    width: auto;
     margin-bottom: 15px;
 }
 
 h1 {
     color: #2c3e50;
     font-size: 2.2rem;
+    margin-bottom: 15px;
+}
+
+.action-buttons {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.btn-add {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.btn-add:hover {
+    background-color: #3e8e41;
+}
+
+.btn-edit {
+    background-color: #2196F3;
+    color: white;
+}
+
+.btn-edit:hover {
+    background-color: #0b7dda;
+}
+
+.btn-cancel {
+    background-color: #f44336;
+    color: white;
+}
+
+.btn-cancel:hover {
+    background-color: #d32f2f;
 }
 
 /* Search Section */
 .search-section {
-    background-color: #fff;
-    padding: 25px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 30px;
+  background-color: #fff;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  margin-bottom: 30px;
+  position: relative;
+  z-index: 1;
+  overflow: visible;
 }
 
 .search-box {
-    display: flex;
-    margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 2;
 }
 
+
+
 #searchInput {
-    flex: 1;
-    padding: 12px 15px;
-    border: 1px solid #ddd;
-    border-radius: 4px 0 0 4px;
-    font-size: 16px;
+  flex: 1;
+  min-width: 250px;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 16px;
+  z-index: 2;
+}
+
+
+#searchInput:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 3px #3498db66;
 }
 
 #searchBtn {
-    padding: 12px 20px;
-    background-color: #3498db;
-    color: white;
-    border: none;
-    border-radius: 0 4px 4px 0;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s;
+  padding: 12px 20px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  z-index: 2;
 }
 
 #searchBtn:hover {
@@ -92,38 +160,85 @@ h1 {
 }
 
 .employee-card {
+  width: 100%;
+  margin: 20px 0;
+  padding: 25px;
+  box-sizing: border-box;
+}
+
+.employee-card:hover {
+   transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
     display: flex;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    padding: 25px;
-    margin-bottom: 20px;
-    gap: 25px;
-}
-
-.employee-photo {
-    flex: 0 0 150px;
-}
-
-.employee-photo img {
-    width: 100%;
-    border-radius: 4px;
-    border: 1px solid #eee;
-}
-
-.employee-details {
-    flex: 1;
-}
-
-.employee-details h2 {
-    color: #2c3e50;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 15px;
-    padding-bottom: 10px;
+    padding-bottom: 15px;
     border-bottom: 1px solid #eee;
 }
 
-.employee-details p {
-    margin-bottom: 8px;
+.card-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.employee-avatar {
+    background-color: #3498db;
+    color: #fff;
+    font-weight: bold;
+    font-size: 28px;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+}
+
+.employee-info {
+    flex: 1;
+}
+
+.employee-info h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.4rem;
+    color: #2c3e50;
+}
+
+.employee-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+    padding-top: 15px;
+}
+
+.detail-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.detail-item label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #7f8c8d;
+    font-size: 0.9rem;
+}
+
+.detail-item .detail-value {
+    padding: 8px;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    min-height: 38px;
+}
+
+.detail-item .detail-value[contenteditable="true"] {
+    background-color: #fffde7;
+    border: 1px dashed #ffc107;
+    padding: 7px;
 }
 
 .no-results, .loading {
@@ -149,41 +264,381 @@ h1 {
     color: #3498db;
 }
 
+/* Add Form Styles */
+.add-form {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.field-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.field-name, .field-value {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    flex: 1;
+}
+
+.field-name {
+    max-width: 150px;
+}
+
+.add-field-btn, .remove-field-btn {
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: 50%;
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.remove-field-btn {
+    background-color: #f44336;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
 /* Footer */
 footer {
     text-align: center;
     margin-top: 40px;
     padding-top: 20px;
     border-top: 1px solid #e1e1e1;
-    color: #7f8c8d;
-    font-size: 14px;
+    color: #999;
+    font-size: 13px;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .employee-card {
-        flex-direction: column;
+    header {
+        padding-top: 60px;
     }
     
-    .employee-photo {
-        flex: 0 0 auto;
-        text-align: center;
-    }
-    
-    .employee-photo img {
-        width: 150px;
+    .action-buttons {
+        position: static;
+        margin-top: 15px;
     }
     
     .search-box {
         flex-direction: column;
     }
-    
-    #searchInput {
-        border-radius: 4px;
-        margin-bottom: 10px;
-    }
-    
+
     #searchBtn {
         border-radius: 4px;
+        margin-top: 10px;
     }
+    
+    .employee-details {
+        grid-template-columns: 1fr;
+    }
+    
+    .field-group {
+        flex-wrap: wrap;
+    }
+    
+    .field-name, .field-value {
+        min-width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .employee-info h3 {
+        font-size: 1.2rem;
+    }
+}
+.add-detail-form {
+    margin-top: 15px;
+    padding: 15px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+}
+
+.add-detail-form .field-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.add-detail-form input {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.new-field-name {
+    min-width: 120px;
+}
+
+.new-field-value {
+    flex: 1;
+    min-width: 150px;
+}
+/* style.css */
+body {
+  font-family: 'Segoe UI', 'Roboto', sans-serif;
+  line-height: 1.6;
+  color: #333;
+}
+
+h1 {
+  font-size: 2.2rem;
+  color: #2c3e50;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+h3 {
+  font-size: 1.4rem;
+  color: #2c3e50;
+  margin-bottom: 1rem;
+}
+
+.employee-details p {
+  margin-bottom: 0.8rem;
+  font-size: 1rem;
+  color: #555;
+}
+/* style.css */
+header {
+  background: linear-gradient(135deg, #3498db, #2c3e50);
+  color: white;
+  padding: 2rem 0;
+  text-align: center;
+  border-radius: 0 0 12px 12px;
+  margin-bottom: 2rem;
+}
+
+header h1 {
+  color: white;
+  margin: 0;
+  font-weight: 700;
+}   
+/* style.css */
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.btn-add {
+  background: #4CAF50;
+  color: white;
+}
+
+.btn-add:hover {
+  background: #3e8e41;
+  transform: scale(1.02);
+}
+
+.btn-edit {
+  background: #2196F3;
+  color: white;
+}
+
+.btn-edit:hover {
+  background: #0b7dda;
+}
+/* style.css */
+#loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+#loading i {
+  font-size: 3rem;
+  color: #3498db;
+  margin-bottom: 1rem;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+/* style.css */
+.dark-mode {
+  background-color: #1a1a1a;
+  color: #f0f0f0;
+}
+
+.dark-mode .employee-card {
+  background: #2d2d2d;
+  border-color: #444;
+}
+
+.dark-mode header {
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+}
+/* style.css */
+#searchSuggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  z-index: 1;
+  border-radius: 0 0 6px 6px;
+  display: none; /* make sure it's hidden when empty */
+}
+
+.suggestion {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.suggestion:hover {
+  background: #f0f0f0;
+}
+/* style.css */
+@media (max-width: 768px) {
+  .employee-card {
+    padding: 15px;
+  }
+
+  .employee-details {
+    grid-template-columns: 1fr;
+  }
+
+  header h1 {
+    font-size: 1.8rem;
+  }
+
+  .search-box {
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+  }
+
+  #searchBtn {
+    width: 100%;
+    margin-top: 5px;
+    border-radius: 6px;
+  }
+}
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 12px 24px;
+  border-radius: 4px;
+  color: white;
+  z-index: 1000;
+}
+.notification.success { background: #4CAF50; }
+.notification.error { background: #F44336; }
+.notification.info { background: #2196F3; }
+.add-detail-form {
+  padding: 10px;
+  margin-top: 10px;
+  background: #f5f5f5;
+  border-radius: 4px;
+}
+
+.field-group {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.btn-icon {
+  padding: 0.5em;
+  min-width: auto;
+}
+/* Add this to your style.css */
+.card-actions {
+  position: relative;
+  z-index: 10; /* Ensures buttons stay above other elements */
+}
+
+.btn {
+  cursor: pointer;
+  position: relative;
+}
+
+/* Prevent any overlapping elements */
+.employee-card {
+  position: relative;
+  overflow: visible;
+}
+/* Basic styling - adjust as needed */
+.employee-card {
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+}
+
+.card-actions {
+  margin-top: 10px;
+}
+
+.detail-item {
+  margin: 5px 0;
+}
+
+.add-detail-form {
+  background: #f5f5f5;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+}
+
+.field-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.dark-mode {
+  background: #333;
+  color: #fff;
+}
+
+#searchSuggestions {
+  background: white;
+  border: 1px solid #ddd;
+  max-height: 200px;
+  overflow-y: auto;
 }
