@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Search Portal</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="ncl logo.jpg" alt="Company Logo" class="logo">
+            <h1>Employee Search Portal</h1>
+        </header>
+
+        <section class="search-section">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Enter employee ID or name...">
+                <button id="searchBtn"><i class="fas fa-search"></i> Search</button>
+            </div>
+            <div class="search-options">
+                <label>
+                    <input type="radio" name="searchType" value="id" checked> Search by ID
+                </label>
+                <label>
+                    <input type="radio" name="searchType" value="name"> Search by Name
+                </label>
+            </div>
+        </section>
+
+        <section class="results-section">
+            <div id="loading" class="loading" style="display: none;">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Loading employee data...</p>
+            </div>
+            
+            <div id="noResults" class="no-results" style="display: none;">
+                <i class="fas fa-user-times"></i>
+                <p>No employees found</p>
+            </div>
+
+            <div id="employeeResults">
+                <!-- Employee cards will be inserted here by JavaScript -->
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2023 Employee Search Portal. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
