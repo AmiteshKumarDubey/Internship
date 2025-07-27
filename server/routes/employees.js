@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
+// Import controller functions
 const {
   getEmployees,
   getEmployeeById,
@@ -9,22 +10,21 @@ const {
   addEmployeeDetail,
   getDepartmentEmployees
 } = require('../controllers/employeeController');
+router
+  .route('/')
+  .get(getEmployees)        // GET /api/employees?search=xyz (optional)
+  .post(createEmployee);    // POST /api/employees
 
-// Main employee routes
-router.route('/')
-  .get(getEmployees)
-  .post(createEmployee);
+router
+  .route('/department/:department')
+  .get(getDepartmentEmployees); // GET /api/employees/department/IT
+router
+  .route('/:id')
+  .get(getEmployeeById)     // GET /api/employees/:id
+  .put(updateEmployee);     // PUT /api/employees/:id
 
-// Department route
-router.route('/department/:department')
-  .get(getDepartmentEmployees);
 
-// Get or update employee by ID
-router.route('/:id')
-  .get(getEmployeeById)
-  .put(updateEmployee);
-
-// Add dynamic field to employee
-router.patch('/:id/details', addEmployeeDetail);
+router
+  .patch('/:id/details', addEmployeeDetail); // PATCH /api/employees/:id/details
 
 module.exports = router;
