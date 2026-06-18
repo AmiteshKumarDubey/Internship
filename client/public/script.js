@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
   setupDarkMode();
   setupSearchSuggestions();
   setupFieldButtons();
+  wakeUpBackend();
 
   // ========== Event Listeners ==========
   searchBtn.addEventListener('click', searchEmployees);
@@ -58,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
         throw new Error('Please enter a valid 24-character employee ID');
       }
       url = `${API_BASE_URL}/employees/${query}`;
-      response = await fetchWithTimeout(url, {}, 5000);
+      response = await fetchWithTimeout(url, {}, 60000);
       
       // Handle single employee response
       const result = await response.json();
@@ -75,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
       
     } else {
       url = `${API_BASE_URL}/employees?search=${encodeURIComponent(query)}`;
-      response = await fetchWithTimeout(url, {}, 5000);
+      response = await fetchWithTimeout(url, {}, 60000);
       
       const result = await response.json();
       if (!result.success) {
@@ -468,8 +469,26 @@ async function addEmployeeDetail(id, key, value) {
       .join('');
   }
 
-  function showLoading(show) {
-    loadingDiv.style.display = show ? 'flex' : 'none';
+  let loadingTimeoutId = null;
+
+  function showLoading(show, customMessage = "Loading employee data...") {
+    if (loadingTimeoutId) {
+      clearTimeout(loadingTimeoutId);
+      loadingTimeoutId = null;
+    }
+
+    const loadingText = loadingDiv.querySelector('p');
+    if (show) {
+      loadingText.textContent = customMessage;
+      loadingDiv.style.display = 'flex';
+      
+      // If server doesn't respond in 3 seconds, indicate it might be waking up (Render free tier cold start)
+      loadingTimeoutId = setTimeout(() => {
+        loadingText.textContent = "Waking up server (Render free tier can take up to 50 seconds to boot)...";
+      }, 3000);
+    } else {
+      loadingDiv.style.display = 'none';
+    }
   }
 
   function showNoResults(message) {
@@ -482,7 +501,7 @@ async function addEmployeeDetail(id, key, value) {
     noResultsDiv.style.display = 'none';
   }
 
-  async function fetchWithTimeout(resource, options = {}, timeout = 8000) {
+  async function fetchWithTimeout(resource, options = {}, timeout = 60000) {
     const controller = new AbortController();
     const id = setTimeout(() => controller.abort(), timeout);
     
@@ -493,6 +512,17 @@ async function addEmployeeDetail(id, key, value) {
     
     clearTimeout(id);
     return response;
+  }
+
+  async function wakeUpBackend() {
+    try {
+      console.log("Warming up backend server...");
+      const healthUrl = API_BASE_URL.replace(/\/api\/?$/, '/health');
+      await fetch(healthUrl);
+      console.log("Backend server is awake!");
+    } catch (e) {
+      console.warn("Error warming up backend:", e);
+    }
   }
 
   // ========== UI Enhancements ==========
