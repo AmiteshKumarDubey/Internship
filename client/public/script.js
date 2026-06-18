@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // ========== Initialize ==========
   let currentSearchType = 'id'; // Default search type
-  const API_BASE_URL = 'https://internship-kmi6.onrender.com/api';
+  const API_BASE_URL = 'https://ncl-employee-api.onrender.com/api';
   
   setupDarkMode();
   setupSearchSuggestions();
