@@ -3,8 +3,8 @@ require('dotenv').config(); // Load variables
 
 const connectDB = async () => {
   try {
-    const uri = process.env.MONGODB_URI;
-    if (!uri) throw new Error("MONGODB_URI not defined in .env");
+    const uri = process.env.MONGODB_URI || 'mongodb+srv://ncluser:Amiteshkumar@ncl-employee-cluster.feomiic.mongodb.net/?appName=ncl-employee-cluster';
+    if (!uri) throw new Error("MONGODB_URI not defined");
 
     await mongoose.connect(uri, {
       useNewUrlParser: true,
