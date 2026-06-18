@@ -4,7 +4,7 @@ require('dotenv').config(); // Load variables
 const connectDB = async () => {
   try {
     // Using hardcoded URI - env var was corrupted on Render
-    const uri = 'mongodb+srv://ncluser:Amiteshkumar@ncl-employee-cluster.feomiic.mongodb.net/?appName=ncl-employee-cluster';
+    const uri = 'mongodb+srv://ncluser:Amitesh1234@ncl-employee-cluster.feomiic.mongodb.net/?appName=ncl-employee-cluster';
 
     await mongoose.connect(uri, {
       useNewUrlParser: true,
